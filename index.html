@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Sudoku generator and solver created in pure JavaScript.">
+    <meta name="keywords" content="sudoku, javascript, littlebigowl">
+    <meta name="author" content="Peter Sciranka">
+    <title>Sudoku | JavaScript</title>
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="images/favicon2-16.png" type="image/png" sizes="16x16">
+    <link rel="shortcut icon" href="images/favicon2-32.png" type="image/png" sizes="32x32">
+    <link rel="shortcut icon" href="images/favicon2-64.png" type="image/png" sizes="64x64">
+    <link rel="shortcut icon" href="images/favicon2-96.png" type="image/png" sizes="96x96">
+    <link rel="shortcut icon" href="images/favicon2-128.png" type="image/png" sizes="128x128">
+    <link rel="shortcut icon" href="images/favicon2-196.png" type="image/png" sizes="196x196">
+    <link rel="shortcut icon" href="images/favicon2-228.png" type="image/png" sizes="228x228">
+    <link rel="shortcut icon" href="images/favicon2-310.png" type="image/png" sizes="310x310">
+    <link rel="apple-touch-icon" href="images/favicon2-120.png" type="image/png" sizes="120x120">
+    <link rel="apple-touch-icon" href="images/favicon2-152.png" type="image/png" sizes="152x152">
+    <link rel="apple-touch-icon" href="images/favicon2-180.png" type="image/png" sizes="180x180">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- MODAL -->
+    <!-- MODAL - CHOOSE NUMBER for a cell -->
+    <div class="modal" id="modal-number">
+        <div class="modal-container">
+            <div class="modal-container-center">
+                <div class="modal-section">
+                    <div class="modal-choose-number" id="modalNumber_1">1</div>
+                    <div class="modal-choose-number" id="modalNumber_2">2</div>
+                    <div class="modal-choose-number" id="modalNumber_3">3</div>
+                </div>
+                <div class="modal-section">
+                    <div class="modal-choose-number" id="modalNumber_4">4</div>
+                    <div class="modal-choose-number" id="modalNumber_5">5</div>
+                    <div class="modal-choose-number" id="modalNumber_6">6</div>
+                </div>
+                <div class="modal-section">
+                    <div class="modal-choose-number" id="modalNumber_7">7</div>
+                    <div class="modal-choose-number" id="modalNumber_8">8</div>
+                    <div class="modal-choose-number" id="modalNumber_9">9</div>
+                </div>
+                <div class="modal-section">
+                    <div class="modal-choose-number modal-number-empty" id="modalNumber_0">empty</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- MODAL - CHOOSE DIFFICULTY of a new game -->
+    <div class="modal" id="modal-newSudoku">
+        <div class="modal-container">
+            <div class="modal-container-center">
+                <div class="difficulty" id="newSudoku-easy">EASY</div>
+                <div class="difficulty" id="newSudoku-medium">MEDIUM</div>
+                <div class="difficulty" id="newSudoku-hard">HARD</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="main-container">
+        <div id="nav-container">
+            <h1>Sudoku</h1>
+            <nav>
+                <ul id="navbar">
+                    <li id="navPlay" class="nav-item active">Play</li>
+                    <li id="navSolve" class="nav-item not-active">Solve</li>
+                    <li id="navPrint" class="nav-item not-active">Print</li>
+                </ul>
+            </nav>
+        </div>
+
+        <div id="playground-container">
+            <div id="playground-sub-container">
+                <div id="playgroundGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="controls-main-container">
+        <div id="control-container">
+            <div id="control-container-play">
+                <div class="controls controls-2" id="newSudoku-btn">New sudoku</div>
+                <div class="controls controls-2" id="solutionSudoku-btn">Solution</div>
+            </div>
+            <div id="control-container-solve">
+                <div class="controls controls-1" id="solveSudoku-btn">Solve</div>                
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main-min.js"></script>
+</body>
+
+</html>
