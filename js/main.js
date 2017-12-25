@@ -49,7 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
         },
 
         clickedRow: 0,
-        clickedColumn: 0
+        clickedColumn: 0,
+        isSolved: false
     };
 
     var modalNumberController = {
@@ -236,8 +237,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     solveSudokuBtn.addEventListener("click", function () {
-        solveSudoku(sudokuController.numbersGrid);
-        writeSudokuToView(sudokuController.numbersGrid);
+        if (!sudokuController.isSolved) {
+            sudokuController.isSolved = true;
+            solveSudoku(sudokuController.numbersGrid);
+            writeSudokuToView(sudokuController.numbersGrid);
+            solveSudokuBtn.innerText = "New grid";
+        } else {
+            sudokuController.isSolved = false;
+            solveSudokuBtn.innerText = "Solve";
+            loadSolveState();
+        }
     });
     // Adding an event listener for a Navigation Toggle
 
