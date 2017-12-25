@@ -93,6 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
         controlsPlay.style.display = "none";
         controlsSolve.style.display = "flex";
         inPlayState = false;
+        sudokuController.isSolved = false;
+        solveSudokuBtn.innerText = "Solve";
 
         createSudokuGrid();
         createEmptySudokuToBeSolved();
@@ -243,8 +245,6 @@ document.addEventListener("DOMContentLoaded", function () {
             writeSudokuToView(sudokuController.numbersGrid);
             solveSudokuBtn.innerText = "New grid";
         } else {
-            sudokuController.isSolved = false;
-            solveSudokuBtn.innerText = "Solve";
             loadSolveState();
         }
     });
