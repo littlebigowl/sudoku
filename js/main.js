@@ -151,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
             sudokuController.numbersGrid = JSON.parse(localStorage.getItem("numbersGrid"));
             sudokuController.isEditableGrid = JSON.parse(localStorage.getItem("editableGrid"));
             sudokuController.originalGrid = JSON.parse(localStorage.getItem("originalGrid"));
-            updateEditableCellView(sudokuController.originalGrid);
+            updateEditableCellView(JSON.parse(localStorage.getItem("originalGrid")));
         }
     }
 
