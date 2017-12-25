@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         for (var i = 1; i < 10; i++) {
             var modalNumElementView = document.getElementById("modalNumber_" + i);
-            if (possibleNumbers.length > 0 && possibleNumbers.includes(i) || sudokuGrid[row][col] == i) {
+            if (possibleNumbers.length > 0 && possibleNumbers.indexOf(i) >= 0 || sudokuGrid[row][col] == i) {
                 modalNumElementView.classList.remove("notClickableModalNumber");
                 modalNumberController.numberStateArray[i] = true;
             } else {
