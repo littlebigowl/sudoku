@@ -455,7 +455,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var helpArray2 = array2.slice(0);
         if (helpArray1 && helpArray2) {
             return helpArray1.filter(function (n) {
-                return helpArray2.includes(n);
+                return helpArray2.indexOf(n) >= 0;
             });
         } else {
             return 0;
