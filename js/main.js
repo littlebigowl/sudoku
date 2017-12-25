@@ -518,7 +518,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function possibleFromRow(row, grid) {
         var array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         for (var i = 1; i < 10; i++) {
-            if (grid[row].includes(i)) {
+            if (grid[row].indexOf(i) >= 0) {
                 removeFromArray(array, i);
             }
         }
@@ -585,7 +585,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 3 functions checking, if the number is allowed to the position in a grid.
     function isAllowedRow(row, mainGrid, number) {
-        return mainGrid[row].includes(number) ? false : true;
+        return mainGrid[row].indexOf(number) >= 0 ? false : true;
     }
     function isAllowedColumn(column, mainGrid, number) {
         for (var i = 0; i < mainGrid.length; i++) {
