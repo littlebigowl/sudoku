@@ -462,47 +462,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Function switches rows of 2D array
-    function switchRows(squareArray, rowsToPushDown) {
-        var helpArray = squareArray.slice();
-        var newArray = squareArray.slice();
-        for (var i = 0; i < rowsToPushDown; i++) {
-            newArray[1] = helpArray[0];
-            newArray[2] = helpArray[1];
-            newArray[0] = helpArray[2];
-            helpArray = newArray.slice();
-        }
-        return newArray;
-    };
-    // Function switches columns of 2D array
-    function switchColumns(squareArray2, columnsToPushLeft) {
-        var helpArray2 = [];
-        var newArray2 = [];
-        for (var k = 0; k < 3; k++) {
-            helpArray2[k] = [];
-            newArray2[k] = [];
-        }
-        for (var x = 0; x < 3; x++) {
-            for (var y = 0; y < 3; y++) {
-                helpArray2[x][y] = squareArray2[x][y];
-                newArray2[x][y] = squareArray2[x][y];
-            }
-        }
-        for (var i = 0; i < columnsToPushLeft; i++) {
-            for (var j = 0; j < 3; j++) {
-                newArray2[j][1] = helpArray2[j][0];
-                newArray2[j][2] = helpArray2[j][1];
-                newArray2[j][0] = helpArray2[j][2];
-            }
-            for (var _x = 0; _x < 3; _x++) {
-                for (var _y = 0; _y < 3; _y++) {
-                    helpArray2[_x][_y] = newArray2[_x][_y];
-                }
-            }
-        }
-        return newArray2;
-    };
-
     // Fills main sudoku square wit values from a small square.
     function putSquareToMainGrid(squareNumber, squareArray, mainGrid) {
         var col = squareNumber % 3;
