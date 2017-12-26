@@ -839,23 +839,23 @@ document.addEventListener("DOMContentLoaded", function () {
     controlsDownload.addEventListener("click", function () {
         printLoader.style.display = "flex";
 
-        var pdf = new jsPDF();
-        var pdfWidth = pdf.internal.pageSize.width;
-        var pdfHeight = pdf.internal.pageSize.height;
+        setTimeout(function () {
+            var pdf = new jsPDF();
+            var pdfWidth = pdf.internal.pageSize.width;
+            var pdfHeight = pdf.internal.pageSize.height;
 
-        for (var i = 0; i < numberOfPages; i++) {
-            createSudokuPage(difficultyPrintedSudokus);
+            for (var i = 0; i < numberOfPages; i++) {
+                createSudokuPage(difficultyPrintedSudokus);
 
-            var imgData = printCanvas.toDataURL("image/jpeg", 1.0);
-            pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+                var imgData = printCanvas.toDataURL("image/jpeg", 1.0);
+                pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
 
-            if (i + 1 !== numberOfPages) {
-                pdf.addPage();
+                if (i + 1 !== numberOfPages) {
+                    pdf.addPage();
+                }
             }
-        }
-
-        printLoader.style.display = "none";
-
-        pdf.save("sudoku.pdf");
+            printLoader.style.display = "none";
+            pdf.save("sudoku.pdf");
+        }, 50);
     });
 });
