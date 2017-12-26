@@ -167,6 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
             Console.log("Sorry, I can not use your local storage, please allow it.");
         }
     }
+
     // Event to resize the playground, the grid and all grid cells + set the fontSize of the numbers in the view.
     var resizeControl = void 0;
     window.addEventListener("resize", function () {
@@ -246,6 +247,14 @@ document.addEventListener("DOMContentLoaded", function () {
             solveSudokuBtn.innerText = "New grid";
         } else {
             loadSolveState();
+        }
+    });
+
+    document.addEventListener("touchstart", function () {
+        playgroundController.canHover = false;
+        var gridCells = document.getElementsByClassName("sudokuCell");
+        for (var i = 0; i < gridCells.length; i++) {
+            gridCells[i].classList.remove("canHover");
         }
     });
     // Adding an event listener for a Navigation Toggle

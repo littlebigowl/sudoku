@@ -40,8 +40,6 @@ h1 {
   padding-left: 15px;
   width: 50%;
   border-bottom: 2px solid #eee; }
-  h1:hover {
-    cursor: pointer; }
 
 nav {
   width: 50%; }
