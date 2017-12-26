@@ -22,6 +22,15 @@ document.addEventListener("DOMContentLoaded", function () {
     var printContainer = document.getElementById("print-container");
     var printCanvas = document.getElementById("printCanvas");
 
+    var printDifficultyEasy = document.getElementById("printDifficultyEasy");
+    var printDifficultyMedium = document.getElementById("printDifficultyMedium");
+    var printDifficultyHard = document.getElementById("printDifficultyHard");
+    var numberOfPages1 = document.getElementById("numberOfPages1");
+    var numberOfPages3 = document.getElementById("numberOfPages3");
+    var numberOfPages5 = document.getElementById("numberOfPages5");
+    var numberOfPages10 = document.getElementById("numberOfPages10");
+    var numberOfPages25 = document.getElementById("numberOfPages25");
+
     var innerWidth = window.innerWidth;
     var innerHeight = window.innerHeight;
     var inPlayState = false;
@@ -113,13 +122,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Load Print State of application
     function loadPrintState() {
+        printContainer.style.display = "block";
         controlsPlay.style.display = "none";
         controlsSolve.style.display = "none";
-        controlsDownload.style.display = "none";
+        controlsDownload.style.display = "flex";
 
         playgroundContainer.style.display = "none";
-        printContainer.style.display = "block";
-        printCanvas.style.display = "block";
     }
 
     // Writes numbers from the array to view 
@@ -275,8 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var _loop2 = function _loop2(i) {
         if (navItems[i].classList.contains("active")) {
-            //loadPlayState(difficulty.easy, true);
-            loadPrintState();
+            loadPlayState(difficulty.easy, true);
         }
         // Adding an event listeners to a navigation item
         navItems[i].addEventListener("click", function () {
@@ -387,6 +394,7 @@ document.addEventListener("DOMContentLoaded", function () {
         playgroundContainer.style.width = width + "px";
         controlContainer.style.width = width + "px";
         playgroundContainer.style.height = height + "px";
+        printContainer.style.height = height + "px";
     }
     function setPlaygroundCellDimension(element, dim) {
         element.style.width = dim + "px";
@@ -704,6 +712,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     var context = printCanvas.getContext("2d");
+    context.beginPath();
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, printCanvas.width, printCanvas.height);
+
+    var numberOfPages = 5;
+    var difficultyPrintedSudokus = difficulty.easy;
 
     function createGridOnCanvas(left, top, cellWidth, sudokuGrid) {
         for (var i = 0; i < 9; i++) {
@@ -747,6 +761,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function createSudokuPage(difficulty) {
+        context.clearRect(0, 0, printCanvas.width, printCanvas.height);
         context.beginPath();
         context.fillStyle = "#ffffff";
         context.fillRect(0, 0, printCanvas.width, printCanvas.height);
@@ -776,5 +791,66 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    createSudokuPage(difficulty.easy);
+    function clearDifficultyActiveClassFromBtns() {
+        var printDiff = document.getElementsByClassName("print-options-diff");
+        for (var i = 0; i < printDiff.length; i++) {
+            printDiff[i].classList.remove("print-active");
+        }
+    }
+    printDifficultyEasy.addEventListener("click", function () {
+        clearDifficultyActiveClassFromBtns();
+        printDifficultyEasy.classList.add("print-active");
+        difficultyPrintedSudokus = difficulty.easy;
+    });
+    printDifficultyMedium.addEventListener("click", function () {
+        clearDifficultyActiveClassFromBtns();
+        printDifficultyMedium.classList.add("print-active");
+        difficultyPrintedSudokus = difficulty.medium;
+    });
+    printDifficultyHard.addEventListener("click", function () {
+        clearDifficultyActiveClassFromBtns();
+        printDifficultyHard.classList.add("print-active");
+        difficultyPrintedSudokus = difficulty.hard;
+    });
+
+    function clearNumbersActiveClassFromBtns() {
+        var printNum = document.getElementsByClassName("print-options-num");
+        for (var i = 0; i < printNum.length; i++) {
+            printNum[i].classList.remove("print-active");
+        }
+    }
+    var printNum = document.getElementsByClassName("print-options-num");
+
+    var _loop5 = function _loop5(i) {
+        printNum[i].addEventListener("click", function (e) {
+            var numHelp = printNum[i].id.split("_");
+            var num = parseInt(numHelp[1]);
+            numberOfPages = num;
+            clearNumbersActiveClassFromBtns();
+            printNum[i].classList.add("print-active");
+        });
+    };
+
+    for (var i = 0; i < printNum.length; i++) {
+        _loop5(i);
+    }
+
+    controlsDownload.addEventListener("click", function () {
+        var pdf = new jsPDF();
+        var pdfWidth = pdf.internal.pageSize.width;
+        var pdfHeight = pdf.internal.pageSize.height;
+
+        for (var i = 0; i < numberOfPages; i++) {
+            createSudokuPage(difficultyPrintedSudokus);
+
+            var imgData = printCanvas.toDataURL("image/jpeg", 1.0);
+            pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+
+            if (i + 1 !== numberOfPages) {
+                pdf.addPage();
+            }
+        }
+
+        pdf.save("sudoku.pdf");
+    });
 });

@@ -292,11 +292,18 @@ nav {
   color: #3b94e0;
   -webkit-transition: all .4s;
   transition: all .4s;
-  border-radius: 4px; }
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
   .print-options-item:hover {
     cursor: pointer;
-    color: navy;
-    border-color: navy; }
+    color: navy; }
+
+.print-active {
+  color: navy;
+  border-color: navy; }
 
 .editableCell {
   color: #010177; }
@@ -310,7 +317,7 @@ nav {
   background: #555; }
 
 #printCanvas {
-  background: #fff; }
+  display: none; }
 
 @media (max-width: 320px), (max-height: 400px) {
   .modal-container {
@@ -325,6 +332,13 @@ nav {
   .difficulty {
     font-size: 30px;
     padding: 20px; }
+  #print-container {
+    text-align: center; }
+    #print-container h3 {
+      font-size: 20px;
+      padding: 5px 15px; }
+  .print-options {
+    margin-bottom: 15px; }
   .print-options-item {
     font-size: 20px; } }
 
