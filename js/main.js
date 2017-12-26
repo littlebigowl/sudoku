@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var solveSudokuBtn = document.getElementById("solveSudoku-btn");
     var printContainer = document.getElementById("print-container");
     var printCanvas = document.getElementById("printCanvas");
+    var printLoader = document.getElementById("printLoader");
 
     var printDifficultyEasy = document.getElementById("printDifficultyEasy");
     var printDifficultyMedium = document.getElementById("printDifficultyMedium");
@@ -716,7 +717,7 @@ document.addEventListener("DOMContentLoaded", function () {
     context.fillStyle = "#ffffff";
     context.fillRect(0, 0, printCanvas.width, printCanvas.height);
 
-    var numberOfPages = 5;
+    var numberOfPages = 1;
     var difficultyPrintedSudokus = difficulty.easy;
 
     function createGridOnCanvas(left, top, cellWidth, sudokuGrid) {
@@ -836,6 +837,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     controlsDownload.addEventListener("click", function () {
+        printLoader.style.display = "flex";
+
         var pdf = new jsPDF();
         var pdfWidth = pdf.internal.pageSize.width;
         var pdfHeight = pdf.internal.pageSize.height;
@@ -850,6 +853,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 pdf.addPage();
             }
         }
+
+        printLoader.style.display = "none";
 
         pdf.save("sudoku.pdf");
     });
