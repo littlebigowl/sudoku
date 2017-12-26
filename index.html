@@ -81,21 +81,42 @@
                 <div id="playgroundGrid"></div>
             </div>
         </div>
+
+        <div id="print-container">
+            <h3>Difficulty of a sudoku</h3>            
+            <div class="print-options" id="difficultyOptions">
+                <div class="print-options-item ">Easy</div>
+                <div class="print-options-item ">Medium</div>
+                <div class="print-options-item ">Hard</div>
+            </div>
+            <h3>Number of pages</h3>
+            <div class="print-options" id="difficultyOptions">
+                <div class="print-options-item ">1</div>
+                <div class="print-options-item ">3</div>
+                <div class="print-options-item ">5</div>
+                <div class="print-options-item ">10</div>
+                <div class="print-options-item ">25</div>
+            </div>
+        </div>
+        <canvas id="printCanvas" width="1000" height="1414" ></canvas>
     </div>
 
     <div id="controls-main-container">
         <div id="control-container">
-            <div id="control-container-play">
+            <div class="controls-container" id="control-container-play">
                 <div class="controls controls-2" id="newSudoku-btn">New sudoku</div>
                 <div class="controls controls-2" id="solutionSudoku-btn">Solution</div>
             </div>
-            <div id="control-container-solve">
+            <div class="controls-container" id="control-container-solve">
                 <div class="controls controls-1" id="solveSudoku-btn">Solve</div>                
+            </div>
+            <div class="controls-container" id="control-container-download">
+                <div class="controls controls-1" id="downloadSudoku-btn">Download</div>                
             </div>
         </div>
     </div>
 
-    <script src="js/main-min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

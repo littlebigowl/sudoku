@@ -146,7 +146,7 @@ nav {
   height: 100%;
   margin: 0 auto; }
 
-#control-container-play, #control-container-solve {
+.controls-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -200,6 +200,8 @@ nav {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  -webkit-transition: all 1s;
+  transition: all 1s;
   z-index: 1000; }
 
 .modal-container {
@@ -262,6 +264,40 @@ nav {
   cursor: pointer;
   color: navy; }
 
+#print-container {
+  text-align: center; }
+  #print-container h3 {
+    font-size: 30px;
+    padding: 5px 25px;
+    color: #eee;
+    display: inline-block;
+    background: #3b94e0; }
+
+.print-options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  margin-bottom: 22px; }
+
+.print-options-item {
+  text-align: center;
+  font-size: 30px;
+  border: 2px solid #eee;
+  padding: 5px 15px;
+  margin: 5px;
+  background: #eee;
+  color: #3b94e0;
+  -webkit-transition: all .4s;
+  transition: all .4s;
+  border-radius: 4px; }
+  .print-options-item:hover {
+    cursor: pointer;
+    color: navy;
+    border-color: navy; }
+
 .editableCell {
   color: #010177; }
 
@@ -273,17 +309,24 @@ nav {
   cursor: default;
   background: #555; }
 
+#printCanvas {
+  background: #fff; }
+
 @media (max-width: 320px), (max-height: 400px) {
   .modal-container {
     width: 210px; }
   .modal-choose-number {
     height: 70px;
     font-size: 40px; }
+  #controls-main-container {
+    height: 45px; }
   .controls {
     font-size: 18px; }
   .difficulty {
     font-size: 30px;
-    padding: 20px; } }
+    padding: 20px; }
+  .print-options-item {
+    font-size: 20px; } }
 
 @media (max-width: 460px) {
   h1 {
@@ -294,4 +337,6 @@ nav {
   .sudokuCell {
     font-size: 2.2rem; }
   .controls {
+    font-size: 20px; }
+  .print-options-item {
     font-size: 20px; } }

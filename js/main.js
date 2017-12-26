@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var modal = document.getElementById("modal-number");
     var controlsPlay = document.getElementById("control-container-play");
     var controlsSolve = document.getElementById("control-container-solve");
+    var controlsDownload = document.getElementById("control-container-download");
     var modalNewSudoku = document.getElementById("modal-newSudoku");
     var newSudokuButton = document.getElementById("newSudoku-btn");
     var newSudokuEasy = document.getElementById("newSudoku-easy");
@@ -18,6 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var newSudokuHard = document.getElementById("newSudoku-hard");
     var solutionSudokuBtn = document.getElementById("solutionSudoku-btn");
     var solveSudokuBtn = document.getElementById("solveSudoku-btn");
+    var printContainer = document.getElementById("print-container");
+    var printCanvas = document.getElementById("printCanvas");
 
     var innerWidth = window.innerWidth;
     var innerHeight = window.innerHeight;
@@ -72,8 +75,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Load Play State of application
     function loadPlayState(dif, old) {
         playgroundContainer.style.display = "flex";
+        printContainer.style.display = "none";
         controlsPlay.style.display = "flex";
         controlsSolve.style.display = "none";
+        controlsDownload.style.display = "none";
+        printCanvas.style.display = "none";
         inPlayState = true;
         createSudokuGrid();
 
@@ -90,8 +96,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Load Solve State of application
     function loadSolveState() {
         playgroundContainer.style.display = "flex";
+        printContainer.style.display = "none";
         controlsPlay.style.display = "none";
         controlsSolve.style.display = "flex";
+        controlsDownload.style.display = "none";
+        printCanvas.style.display = "none";
+
         inPlayState = false;
         sudokuController.isSolved = false;
         solveSudokuBtn.innerText = "Solve";
@@ -105,7 +115,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadPrintState() {
         controlsPlay.style.display = "none";
         controlsSolve.style.display = "none";
+        controlsDownload.style.display = "none";
+
         playgroundContainer.style.display = "none";
+        printContainer.style.display = "block";
+        printCanvas.style.display = "block";
     }
 
     // Writes numbers from the array to view 
@@ -261,7 +275,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var _loop2 = function _loop2(i) {
         if (navItems[i].classList.contains("active")) {
-            loadPlayState(difficulty.easy, true);
+            //loadPlayState(difficulty.easy, true);
+            loadPrintState();
         }
         // Adding an event listeners to a navigation item
         navItems[i].addEventListener("click", function () {
@@ -389,10 +404,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Create sudoku array
     function createMainPlaySudoku(difficulty) {
-        // A filled array
-        var solvedSudokuArray = helpFunctionForSudokuCreation();
         // A Play Array
-        var sudoku = removeNumbersFromSudokuGrid(solvedSudokuArray, difficulty);
+        var sudoku = createSudoku(difficulty);
         var numbersSudoku = copyGrid(sudoku);
         sudokuController.originalGrid = copyGrid(sudoku);
         sudokuController.numbersGrid = numbersSudoku;
@@ -619,6 +632,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         return true;
     }
+    function createSudoku(difficulty) {
+        // A filled array
+        var solvedSudokuArray = helpFunctionForSudokuCreation();
+        // A Play Array
+        var sudoku = removeNumbersFromSudokuGrid(solvedSudokuArray, difficulty);
+        return sudoku;
+    }
 
     function removeNumbersFromSudokuGrid(filledSudokuGrid, difficulty) {
         var numbersToRemove = 81 - difficulty;
@@ -682,4 +702,79 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     }
+
+    var context = printCanvas.getContext("2d");
+
+    function createGridOnCanvas(left, top, cellWidth, sudokuGrid) {
+        for (var i = 0; i < 9; i++) {
+            for (var j = 0; j < 9; j++) {
+
+                if (i < 3 || i > 5) {
+                    if (j < 3 || j > 5) {
+                        context.beginPath();
+                        context.fillStyle = "#bfbfbf";
+                        context.rect(j * cellWidth + left, i * cellWidth + top, cellWidth, cellWidth);
+                        context.fill();
+                    }
+                } else {
+                    if (j > 2 && j < 6) {
+                        context.beginPath();
+                        context.fillStyle = "#bfbfbf";
+                        context.rect(j * cellWidth + left, i * cellWidth + top, cellWidth, cellWidth);
+                        context.fill();
+                    }
+                }
+                context.beginPath();
+                context.rect(j * cellWidth + left, i * cellWidth + top, cellWidth, cellWidth);
+                context.stroke();
+
+                if (sudokuGrid[i][j] > 0) {
+                    writeNumberOnCanvas(j * cellWidth + left, i * cellWidth + top, cellWidth, sudokuGrid[i][j]);
+                }
+            }
+        }
+        context.beginPath();
+        context.rect(left, top, 9 * cellWidth, 9 * cellWidth);
+        context.stroke();
+    }
+
+    function writeNumberOnCanvas(left, top, cellWidth, number) {
+        context.beginPath();
+        context.font = "28px Arial";
+        context.fillStyle = "black";
+        context.textAlign = "center";
+        context.fillText(number, left + cellWidth / 2, top + cellWidth * 0.75);
+    }
+
+    function createSudokuPage(difficulty) {
+        context.beginPath();
+        context.fillStyle = "#ffffff";
+        context.fillRect(0, 0, printCanvas.width, printCanvas.height);
+
+        context.lineWidth = "1";
+        context.strokeStyle = "black";
+        var canvasWidth = printCanvas.width;
+        var canvasHeight = printCanvas.height;
+        var cellWidth = 42;
+        var canvasGridWidth = cellWidth * 9;
+
+        var canvasTops = [];
+        canvasTops[0] = 82;
+        var helpTop = (canvasHeight - 2 * canvasTops[0] - 3 * canvasGridWidth) / 2;
+        canvasTops[1] = canvasTops[0] + canvasGridWidth + helpTop;
+        canvasTops[2] = canvasTops[0] + (canvasGridWidth + helpTop) * 2;
+
+        var canvasLefts = [];
+        canvasLefts[0] = 85;
+        canvasLefts[1] = 9 * cellWidth + canvasLefts[0] + (canvasWidth - (9 * cellWidth + canvasLefts[0]) * 2);
+
+        for (var i = 0; i < 2; i++) {
+            for (var j = 0; j < 3; j++) {
+                var sudokuGrid = createSudoku(difficulty);
+                createGridOnCanvas(canvasLefts[i], canvasTops[j], cellWidth, sudokuGrid);
+            }
+        }
+    }
+
+    createSudokuPage(difficulty.easy);
 });
