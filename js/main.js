@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var printContainer = document.getElementById("print-container");
     var printCanvas = document.getElementById("printCanvas");
     var printLoader = document.getElementById("printLoader");
+    var noSolutionNote = document.getElementById("noSolutionNote");
 
     var printDifficultyEasy = document.getElementById("printDifficultyEasy");
     var printDifficultyMedium = document.getElementById("printDifficultyMedium");
@@ -257,17 +258,27 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     solutionSudokuBtn.addEventListener("click", function () {
-        solveSudoku(sudokuController.originalGrid);
-        writeSudokuToView(sudokuController.originalGrid);
-        sudokuController.numbersGrid = sudokuController.originalGrid;
+        var result = solveSudoku(sudokuController.originalGrid);
+        if (result) {
+            writeSudokuToView(sudokuController.originalGrid);
+            sudokuController.numbersGrid = sudokuController.originalGrid;
+        } else {}
     });
 
     solveSudokuBtn.addEventListener("click", function () {
         if (!sudokuController.isSolved) {
-            sudokuController.isSolved = true;
-            solveSudoku(sudokuController.numbersGrid);
-            writeSudokuToView(sudokuController.numbersGrid);
-            solveSudokuBtn.innerText = "New grid";
+
+            var result = solveSudoku(sudokuController.numbersGrid);
+            if (result) {
+                sudokuController.isSolved = true;
+                writeSudokuToView(sudokuController.numbersGrid);
+                solveSudokuBtn.innerText = "New grid";
+            } else {
+                noSolutionNote.style.display = "flex";
+                setTimeout(function () {
+                    noSolutionNote.style.display = "none";
+                }, 2000);
+            }
         } else {
             loadSolveState();
         }
@@ -617,7 +628,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Solve sudoku :)
     function solveSudoku(sudokuGrid) {
         var possibleNumbersArray = getPossibleNumbersArray(sudokuGrid);
-        solveHelp(sudokuGrid, possibleNumbersArray);
+        var result = solveHelp(sudokuGrid, possibleNumbersArray);
+        return result;
     }
     // A recursion function to solve Sudoku
     function solveHelp(sudokuGrid, possibleNumbersArray) {

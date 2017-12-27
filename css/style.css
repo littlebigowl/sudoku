@@ -335,6 +335,26 @@ nav {
 #preloader {
   text-align: center; }
 
+#noSolutionNote {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  display: none;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  #noSolutionNote p {
+    text-align: center;
+    font-size: 40px;
+    padding: 15px;
+    background: #fd1e1e;
+    color: #eee; }
+
 @media (max-width: 320px), (max-height: 400px) {
   .modal-container {
     width: 210px; }
@@ -359,7 +379,10 @@ nav {
     font-size: 20px; }
   #printLoader p {
     font-size: 30px;
-    padding: 0 7px; } }
+    padding: 0 7px; }
+  #noSolutionNote p {
+    font-size: 25px;
+    padding: 10px; } }
 
 @media (max-width: 460px) {
   h1 {
