@@ -856,6 +856,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             printLoader.style.display = "none";
             pdf.save("sudoku.pdf");
-        }, 50);
+        }, 30);
     });
 });
