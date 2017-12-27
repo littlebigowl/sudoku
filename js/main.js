@@ -858,4 +858,6 @@ document.addEventListener("DOMContentLoaded", function () {
             pdf.save("sudoku.pdf");
         }, 30);
     });
+    var preLoader = document.getElementById("pagePreloader");
+    preLoader.style.display = "none";
 });
