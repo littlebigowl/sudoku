@@ -18,15 +18,18 @@ html {
 
 body {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  background-image: url("../images/owlPattern.png");
-  background-position: -40px -40px; }
+  background: url("../images/bg3.jpeg");
+  background-position: center center;
+  background-size: cover;
+  width: 100%;
+  height: 100vh; }
 
 #main-container {
   max-width: 960px;
   margin: 0 auto; }
 
 #nav-container {
-  background: #3b94e0;
+  background: rgba(39, 39, 39, 0.8);
   height: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -73,11 +76,11 @@ nav {
   user-select: none; }
   .nav-item:hover {
     cursor: pointer;
-    color: navy; }
+    color: #3b94e0; }
 
 .active {
-  border-color: navy;
-  color: navy; }
+  border-color: #3b94e0;
+  color: #3b94e0; }
 
 #playground-container {
   margin: 0 auto;
@@ -154,8 +157,9 @@ nav {
 
 .controls {
   text-align: center;
-  background: #eee;
-  color: #3b94e0;
+  background: rgba(39, 39, 39, 0.8);
+  margin: 3px;
+  color: #eee;
   font-size: 30px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -166,18 +170,17 @@ nav {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  border: 1px solid #3b94e0;
   -webkit-transition: all 0.4s;
   transition: all 0.4s;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  border-radius: 3px; }
+  border-radius: 7px; }
 
 .controls:hover {
   cursor: pointer;
-  color: navy; }
+  color: #3b94e0; }
 
 #control-container-solve {
   display: none; }
@@ -270,8 +273,7 @@ nav {
     font-size: 30px;
     padding: 5px 25px;
     color: #eee;
-    display: inline-block;
-    background: #3b94e0; }
+    display: inline-block; }
 
 .print-options {
   display: -webkit-box;
@@ -289,7 +291,7 @@ nav {
   padding: 5px 15px;
   margin: 5px;
   background: #eee;
-  color: #3b94e0;
+  color: grey;
   -webkit-transition: all .4s;
   transition: all .4s;
   border-radius: 4px;
@@ -299,11 +301,11 @@ nav {
   user-select: none; }
   .print-options-item:hover {
     cursor: pointer;
-    color: navy; }
+    color: #3b94e0; }
 
 .print-active {
-  color: navy;
-  border-color: navy; }
+  color: #3b94e0;
+  border-color: #3b94e0; }
 
 .editableCell {
   color: #010177; }
@@ -396,59 +398,3 @@ nav {
     font-size: 20px; }
   .print-options-item {
     font-size: 20px; } }
-
-#loader {
-  display: block;
-  position: relative;
-  left: 50%;
-  top: 50%;
-  width: 150px;
-  height: 150px;
-  margin: -75px 0 0 -75px;
-  border-radius: 50%;
-  border: 5px solid transparent;
-  border-top-color: #3f119b;
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite; }
-
-#loader:before {
-  content: "";
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  right: 5px;
-  bottom: 5px;
-  border-radius: 50%;
-  border: 4px solid transparent;
-  border-top-color: #7f86ec;
-  -webkit-animation: spin 3s linear infinite;
-  animation: spin 3s linear infinite; }
-
-#loader:after {
-  content: "";
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
-  border-radius: 50%;
-  border: 3px solid transparent;
-  border-top-color: #3b94e0;
-  -webkit-animation: spin 1.5s linear infinite;
-  animation: spin 1.5s linear infinite; }
-
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg); } }
-
-@keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg); }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg); } }
