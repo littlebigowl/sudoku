@@ -304,8 +304,11 @@ nav {
     color: #3b94e0; }
 
 .print-active {
-  color: #3b94e0;
-  border-color: #3b94e0; }
+  color: #eee;
+  border-color: #3b94e0;
+  background: #3b94e0; }
+  .print-active:hover {
+    color: #eee; }
 
 .editableCell {
   color: #010177; }
